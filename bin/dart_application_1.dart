@@ -1,31 +1,68 @@
 void main() {
-  /* 
-  The use of variables as final or const, can promote
-  some benefits for both the user and the computer:
-    ->  The user that is reading your code will know that this variable
-        is not intended to change in anytime, never. This helps to avoid
-        bugs and unnecessary statements.
+  print(isEven(2));
+  final bmi = calculateBMITwo(weight: 66, height: 172);
 
-    ->  When we tell the program that a variable will only have one
-        value, the compiler can do some tricks to optimize our application.  
-  */
+  // Using the optional positional parameter.
+  final bmi2 = calculateBMIThree(66, 172, 'Enzo');
 
-  /* 
-  'final' is a runtime constant. This means that its value
-  CAN be assigned at runtime instead of compile-time. And also
-  that once its value is defined, it can't be changed.
-  */
-  final population = 12000; // Without a type annotation.
-  final int populationTwo = 120000; // Using type annotation.
+  // NOT using the optional positional parameter.
+  final bmi3 = calculateBMIThree(66, 172);
 
-  /* 
-  'const' is almost equal to final, the difference is that it
-  is a compile-time constant, meaning that its value is defined
-  and 'frozen', completely immutable at compile-time.
-  */
+  // Intentionally not overriding an optional parameter default value
+  final bmi4 = calculateBMIFour(weight: 66);
+}
 
-  // var emptyList = const [];
-  const emptyList = []; // This is preffered
-  const name = 'Enzo';
-  const planetWhereHeLives = 'Earth';
+/*
+bool isEven(int number) {
+  // return number % 2 == 0 ? true : false;
+  if (number % 2 == 0) {
+    return true;
+  }
+  return false;
+}
+*/
+
+/* (condition) ? (if true, do this) : (otherwise, do this) */
+bool isEven(int number) => number % 2 == 0 ? true : false;
+
+/*
+Normal parameters: are required, therefore they
+don't need a default value. Separed by trailling commas.
+In this format they are also positional parameters.
+*/
+int calculateBMI(double weight, double height) {
+  return 1;
+}
+
+/* 
+Named parameters: you call them by their names, therefore,
+they are preffered since they avoid unnecessary confusion.
+They are required using the 'required' annotation, otherwise,
+they are optional.
+*/
+int calculateBMITwo({required double weight, double? height}) {
+  return 2;
+}
+
+/* 
+Optional Position Parameters: here, you can wrap a set of function parameters
+at the END OF THE DECLARTAION into [], to indicate that they are optional
+positional parameters.
+*/
+int calculateBMIThree(double weight, double height, [String? name]) {
+  return 3;
+}
+
+/* 
+Default parameters values: when using optional parameters, you can also
+define a default value, so that users doesn't have to explicitly list them whem
+calling the function if they want.
+*/
+int calculateBMIFour({required double weight, double height = 170}) {
+  return 4;
+}
+
+// They can also be used for optional positional parameters
+int calculateBMIFive(double weight, double height, [String name = 'Enzo']) {
+  return 5;
 }

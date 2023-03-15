@@ -1,48 +1,23 @@
-void main() {
-  final language = Languages.dart;
-
-  /* 
-  You'll get a warning if you don't handle all of the enum's values in a
-  switch statement.
-  */
-  switch (language) {
-    case Languages.dart:
-      {
-        print(Languages.dart);
-        break;
-      }
-    case Languages.java:
-      {
-        print(Languages.java);
-        break;
-      }
-    case Languages.python:
-      {
-        print(Languages.python);
-        break;
-      }
-  }
-
-  /* 
-  Each value in a Enum has it's own index. So then you can use them where
-  order matters.
-  Assert is a keyword used to test assumptions about the state of the program
-  serving as a debugging aid.
-  */
-  assert(Languages.dart.index == 0, 'Error detected');
-
-  /* 
-  If you need to get a list of every single value in the Enum you can always use
-  your enums's 'values' constant.
-  */
-  final languages = Languages.values;
-}
-
 /* 
-Enum: kind of class to represent a fixed number of constant values.
-Usually used to reduce mistyping values or transposing and
-make code way easier to read.
-In dart, you can't give values to Enums. If you need too assign it
-create a class instead.
+By importing this file, I can access the top-level functions,
+variables, and classes for instance.
+top-level: functions, variables, or classes that aren't nested
+in other functions, nethods, or classes. For instance, the main
+function is a top-level declaration.
 */
-enum Languages { dart, java, python }
+
+import 'code_to_import/file_to_import.dart' as file1;
+import 'code_to_import/file_to_import2.dart' hide thisFunctionWillConflict;
+/* 
+When two functions have the same name in both imports,
+dart doesn't know what of them use. For this, we can use the 
+'as' keyword to give each import a name.
+*/
+
+void main() {
+  print(file1.numberToImport);
+  file1.functionToImport();
+  file1.thisFunctionWillConflict();
+  // Below code doesn't work, since it got hidden by 'hide' keyword
+  // file2.thisFunctionWillConflict();
+}

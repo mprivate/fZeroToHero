@@ -1,68 +1,150 @@
 void main() {
-  print(isEven(2));
-  final bmi = calculateBMITwo(weight: 66, height: 172);
+  var user =
+      User(email: 'test@gmail.com', name: 'Test'); // Instantiation of User
+  user.email; // User object.property to get a property of a class
+  user.printInfo();
 
-  // Using the optional positional parameter.
-  final bmi2 = calculateBMIThree(66, 172, 'Enzo');
+  var enzo = Enzo();
+  enzo.showName('Enzo');
+  enzo.showAge(17);
+  enzo.showEmail('test@gmail.com');
 
-  // NOT using the optional positional parameter.
-  final bmi3 = calculateBMIThree(66, 172);
+  final test = UnitTest();
+  test.testOne();
 
-  // Intentionally not overriding an optional parameter default value
-  final bmi4 = calculateBMIFour(weight: 66);
+  final userTwo = UserTwo(name: 'Enzo');
+  userTwo.happyFace();
 }
 
-/*
-bool isEven(int number) {
-  // return number % 2 == 0 ? true : false;
-  if (number % 2 == 0) {
-    return true;
+// Class: works like a blueprint for objects.
+class User {
+  // User Properties
+  String email;
+  String name;
+
+  // Constructor, used to instantiate
+  // 'this' is used to refer to the current class object variables/properties
+  User({required this.email, required this.name});
+
+  // Methods
+  void printInfo() {
+    print('e-mail: $email\nname: $name');
   }
-  return false;
 }
-*/
 
-/* (condition) ? (if true, do this) : (otherwise, do this) */
-bool isEven(int number) => number % 2 == 0 ? true : false;
+class Person {
+  void showName(String name) {
+    print(name);
+  }
+
+  void showEmail(String email) {
+    print(email);
+  }
+
+  Person(); // constructor
+}
+
+/* 
+Since Enzo is a person, we can use something from OOP called inheritance.
+That is, the process of deriving properties and characteristics 
+from another class. Classes can only inherit from ONE class.
+*/
+class Enzo extends Person {
+  /* 
+  If for instance, we want to access a method from the base class inside
+  our child class, we can use the 'super' keyword. Then we are reffering to the
+  superclass, AKA base or parent class.
+  */
+  void showAge(int age) {
+    super.showName('Enzo');
+    print(age.toString());
+  }
+
+  /* 
+  We can also overwrite the parent/base class methods in Enzo.
+  Using the override notation and by also write the function again just
+  like in Person class.
+  */
+  @override
+  void showEmail(String email) {
+    print('Enzo\'s email: $email');
+  }
+
+  Enzo();
+}
+
+/* 
+Abstract classes: they cannot be directly instatiated, but any of their
+subtypes can. Abstract classes can be used with 2 keywords, 'extends' and
+'implements'. Since they cannot be directly instatiated, they also doesn't have
+a constructor.
+*/
+abstract class Test {
+  /// This is an abstract method because it has no body.
+  void testOne();
+
+  /// This is NOT an abstract method because it has a body.
+  void testTwo() {}
+
+  // No constructor as well
+}
+
+class UnitTest extends Test {
+  // 'extends' keyword usage.
+  /// You need to override the abstract method, otherwise, it throws an error.
+  @override
+  void testOne() {
+    print('hello!');
+  }
+
+  /// Notice that was no need to override all superclass methods.
+}
+
+class UnitTestTwo implements Test {
+  // 'implements' interface usage.
+  @override
+  void testOne() {
+    print('hello!');
+  }
+
+  @override
+  void testTwo() {
+    print('also hello!');
+  }
+
+  /// Notice that it was needed to override all of the superclass methods.
+}
+
+class UserTwo with Happy, Sad {
+  // You can also use trailling commas.
+  // attaching Happy mixin using 'with' keyword.
+  final String name; // using keyword final as name is immutable
+  UserTwo({required this.name});
+}
+
+/* 
+Mixin: is a way to reuse a class's code in multiple cases. Sort of a class
+that can be 'associated' with another class in order to reuse pieces
+WIHOUT INHERITANCE.
+A class can have an infinite number of mixins. Once you assign a mixin to
+a class, it automatically gets access to all of the methods declared in the
+mixin.
+Mixins classes declares no constructors, however, they can also have properties
+just like normal classes.
+*/
+mixin Happy {
+  bool iAmHappy = true;
+  void happyFace() => print(':)');
+}
+
+mixin Sad {
+  void sadFace() => print(':(');
+}
 
 /*
-Normal parameters: are required, therefore they
-don't need a default value. Separed by trailling commas.
-In this format they are also positional parameters.
+You can use the 'on' keyword to restricts the type that uses a mixin, telling
+that it can only be used with a certain class.
 */
-int calculateBMI(double weight, double height) {
-  return 1;
-}
-
-/* 
-Named parameters: you call them by their names, therefore,
-they are preffered since they avoid unnecessary confusion.
-They are required using the 'required' annotation, otherwise,
-they are optional.
-*/
-int calculateBMITwo({required double weight, double? height}) {
-  return 2;
-}
-
-/* 
-Optional Position Parameters: here, you can wrap a set of function parameters
-at the END OF THE DECLARTAION into [], to indicate that they are optional
-positional parameters.
-*/
-int calculateBMIThree(double weight, double height, [String? name]) {
-  return 3;
-}
-
-/* 
-Default parameters values: when using optional parameters, you can also
-define a default value, so that users doesn't have to explicitly list them whem
-calling the function if they want.
-*/
-int calculateBMIFour({required double weight, double height = 170}) {
-  return 4;
-}
-
-// They can also be used for optional positional parameters
-int calculateBMIFive(double weight, double height, [String name = 'Enzo']) {
-  return 5;
+mixin Frustrated on UserTwo {
+  void frustratedFace() => print(':/');
 }

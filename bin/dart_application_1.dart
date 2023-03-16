@@ -1,23 +1,52 @@
 /* 
-By importing this file, I can access the top-level functions,
-variables, and classes for instance.
-top-level: functions, variables, or classes that aren't nested
-in other functions, nethods, or classes. For instance, the main
-function is a top-level declaration.
+async: this keyword defines that the function is
+asynchronous, put it just before it's body.
 */
+void main() async {
+  /* 
+  Asynchronous code: lets your program complete work while
+  waiting for another operation to finish. Once initiated, an
+  asynchronous operation allows other operations to execute
+  before it completes. Examples of async applications are:
+  -> Fetching data over the network;
+  -> Writing/Reading to a database;
+  -> Creating a timer in your app;
+  */
 
-import 'code_to_import/file_to_import.dart' as file1;
-import 'code_to_import/file_to_import2.dart' hide thisFunctionWillConflict;
+  /* 
+  await: this keywork makes the program wait for the future
+  to be completed to proceed. It only waits INSIDE
+  ASYNC FUNCTIONS.
+  */
+  await fetchNews();
+  print('Fetching news');
+  myFunction();
+}
+
 /* 
-When two functions have the same name in both imports,
-dart doesn't know what of them use. For this, we can use the 
-'as' keyword to give each import a name.
+Future: simply represents the result of an async operation in
+dart. It can have two states:
+* Incomplete:
+  The async operation is still running, which means that it
+  will return an Incomplete future.
+* Complete:
+  The async operation has succeeded and the future completes
+  with a value/error.
+    -> Value: if it succeeds
+    -> Error: if it fails
 */
 
-void main() {
-  print(file1.numberToImport);
-  file1.functionToImport();
-  file1.thisFunctionWillConflict();
-  // Below code doesn't work, since it got hidden by 'hide' keyword
-  // file2.thisFunctionWillConflict();
+Future<void> fetchNews() {
+  // Imagine that this function is fetching the news
+  // It has a delay of 2 seconds to represent the fetching
+  return Future.delayed(
+      const Duration(seconds: 2), () => print('News fetched'));
+}
+
+Future<List<num>> fetchNewsTwo() {
+  return Future.delayed(Duration(seconds: 2), () => [1, 2, 3]);
+}
+
+void myFunction() async {
+  await fetchNews();
 }

@@ -37,8 +37,8 @@ class ProjectCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('My Project',
-                    style: TextStyle(
+                Text(title,
+                    style: const TextStyle(
                       fontSize: 19,
                       color: Colors.black,
                     )),
@@ -49,10 +49,10 @@ class ProjectCard extends StatelessWidget {
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      '2023',
-                      style: TextStyle(
+                      year,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
                       ),
@@ -74,9 +74,9 @@ class ProjectCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  'Some description',
-                  style: TextStyle(
+                Text(
+                  description,
+                  style: const TextStyle(
                     fontSize: 15,
                   ),
                 )

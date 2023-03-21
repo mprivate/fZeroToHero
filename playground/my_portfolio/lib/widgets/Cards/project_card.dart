@@ -15,7 +15,7 @@ class ProjectCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: <BoxShadow>[
+        boxShadow: const <BoxShadow>[
           BoxShadow(
             color: Colors.black,
             offset: Offset(0, 2),
@@ -61,7 +61,7 @@ class ProjectCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -73,8 +73,8 @@ class ProjectCard extends StatelessWidget {
                     child: Image.asset(imagePath),
                   ),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Some description',
                   style: TextStyle(
                     fontSize: 15,

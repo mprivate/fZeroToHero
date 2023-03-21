@@ -30,9 +30,14 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
-                ProjectCard(),
+                ProjectCard(
+                  title: 'My Project',
+                  description: 'That\'s a test',
+                  year: '2023',
+                  imagePath: 'assets/images/androidwrite.png',
+                ),
               ],
             ),
           ),

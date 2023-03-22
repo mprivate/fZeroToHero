@@ -26,11 +26,12 @@ class Header extends StatelessWidget {
             ),
           ],
         ),
-        const Icon(
-          Icons.account_circle,
-          color: Colors.black,
-          size: 30,
-        ),
+        ClipRRect(
+            borderRadius: BorderRadius.circular(30.0),
+            child: Image.asset(
+              'assets/images/enzo.jpg',
+              height: 45,
+            )),
       ],
     );
   }

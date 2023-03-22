@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/models/project.dart';
 
 class ProjectCard extends StatelessWidget {
-  final String title, description, year, imagePath;
+  final Project cardInfo;
   const ProjectCard({
     super.key,
-    required this.title,
-    required this.description,
-    required this.year,
-    required this.imagePath,
+    required this.cardInfo,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 15, right: 25.0, bottom: 25.0),
+      padding: const EdgeInsets.all(15.0),
+      width: MediaQuery.of(context).size.width / 1.3,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: const <BoxShadow>[
@@ -37,7 +38,7 @@ class ProjectCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title,
+                Text(cardInfo.name,
                     style: const TextStyle(
                       fontSize: 19,
                       color: Colors.black,
@@ -51,7 +52,7 @@ class ProjectCard extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      year,
+                      cardInfo.year.toString(),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
@@ -62,25 +63,26 @@ class ProjectCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
-                    child: Image.asset(imagePath),
+                    child: Image.network(cardInfo.imagePath),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontSize: 15,
-                  ),
-                )
-              ],
+                  const SizedBox(height: 10),
+                  Text(
+                    cardInfo.description,
+                    maxLines: 2,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),

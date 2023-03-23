@@ -70,7 +70,7 @@ class ProjectCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
-                    child: Image.network(cardInfo.imagePath),
+                    child: Image.asset(cardInfo.imagePath),
                   ),
                   const SizedBox(height: 10),
                   Text(
